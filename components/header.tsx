@@ -10,11 +10,12 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 const navLinks = [
-  { href: "#courses", label: "Courses" },
-  { href: "#about", label: "About" },
-  { href: "#testimonials", label: "Testimonials" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#courses", label: "Courses" },
+  { href: "/#about", label: "About" },
+  { href: "/#testimonials", label: "Testimonials" },
+  { href: "/#contact", label: "Contact" },
 ]
+
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)

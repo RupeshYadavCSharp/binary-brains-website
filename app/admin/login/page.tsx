@@ -27,7 +27,6 @@ export default function AdminLoginPage() {
     setError("")
     setIsLoading(true)
 
-    // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     if (validateAdmin(username, password)) {
@@ -55,6 +54,7 @@ export default function AdminLoginPage() {
             <CardTitle className="text-2xl">Admin Login</CardTitle>
             <CardDescription>Enter your credentials to access the admin panel</CardDescription>
           </CardHeader>
+
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               {error && (
@@ -107,16 +107,6 @@ export default function AdminLoginPage() {
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
-
-            <div className="mt-6 p-4 bg-muted/50 rounded-lg">
-              <p className="text-sm text-muted-foreground text-center">
-                <strong>Demo Credentials:</strong>
-                <br />
-                Username: <code className="text-primary">admin</code>
-                <br />
-                Password: <code className="text-primary">binarybrains2024</code>
-              </p>
-            </div>
           </CardContent>
         </Card>
 

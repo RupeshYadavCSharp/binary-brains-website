@@ -1283,16 +1283,6 @@
     }
   }
 
-  .bg-muted\/50 {
-    background-color: var(--muted);
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-muted\/50 {
-      background-color: color-mix(in oklab, var(--muted) 50%, transparent);
-    }
-  }
-
   .bg-popover {
     background-color: var(--popover);
   }
