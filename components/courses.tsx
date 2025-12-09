@@ -6,13 +6,21 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Clock, ArrowRight } from "lucide-react"
 import { getCourses, type Course } from "@/lib/store"
+import { CourseDetailsDialog } from "./course-details-dialog"
 
 export function Courses() {
   const [courses, setCourses] = useState<Course[]>([])
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   useEffect(() => {
     setCourses(getCourses())
   }, [])
+
+  const handleLearnMore = (course: Course) => {
+    setSelectedCourse(course)
+    setDialogOpen(true)
+  }
 
   return (
     <section id="courses" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -53,6 +61,7 @@ export function Courses() {
                 <Button
                   variant="ghost"
                   className="w-full mt-4 text-primary hover:bg-primary/10 group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                  onClick={() => handleLearnMore(course)}
                 >
                   Learn More
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -62,6 +71,8 @@ export function Courses() {
           ))}
         </div>
       </div>
+
+      <CourseDetailsDialog course={selectedCourse} open={dialogOpen} onOpenChange={setDialogOpen} />
     </section>
   )
 }

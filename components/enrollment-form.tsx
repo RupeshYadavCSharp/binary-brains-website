@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -33,9 +33,14 @@ const courses = [
 
 interface EnrollmentFormProps {
   triggerButton?: React.ReactNode
+  preSelectedCourse?: string
+  batchInfo?: {
+    startDate: string
+    startTime: string
+  }
 }
 
-export function EnrollmentForm({ triggerButton }: EnrollmentFormProps) {
+export function EnrollmentForm({ triggerButton, preSelectedCourse, batchInfo }: EnrollmentFormProps) {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -48,7 +53,17 @@ export function EnrollmentForm({ triggerButton }: EnrollmentFormProps) {
     message: "",
   })
 
+  useEffect(() => {
+    if (open && preSelectedCourse) {
+      setFormData((prev) => ({ ...prev, course: preSelectedCourse }))
+    }
+  }, [open, preSelectedCourse])
+
   const generateEmailContent = () => {
+    const batchDetails = batchInfo
+      ? `\nBatch Details:\n================\nStart Date: ${batchInfo.startDate}\nStart Time: ${batchInfo.startTime}\n`
+      : ""
+
     return `New Enrollment Request - Binary Brains
 
 Student Details:
@@ -58,7 +73,7 @@ Email: ${formData.email}
 Phone: ${formData.phone}
 Course Interested: ${formData.course}
 ${formData.message ? `Message: ${formData.message}` : ""}
-
+${batchDetails}
 ---
 Sent from Binary Brains Website Enrollment Form`
   }
@@ -71,8 +86,10 @@ Sent from Binary Brains Website Enrollment Form`
       await navigator.clipboard.writeText(emailContent)
       setCopied(true)
 
-      // Open default email client
-      const subject = encodeURIComponent(`New Enrollment Request - ${formData.course}`)
+      const subjectText = batchInfo
+        ? `Batch Enrollment - ${formData.course} (Starting ${batchInfo.startDate})`
+        : `New Enrollment Request - ${formData.course}`
+      const subject = encodeURIComponent(subjectText)
       const body = encodeURIComponent(emailContent)
       window.open(
         `https://mail.google.com/mail/?view=cm&fs=1&to=binarybrains0001@gmail.com&su=${subject}&body=${body}`,
@@ -102,7 +119,6 @@ Sent from Binary Brains Website Enrollment Form`
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Validate required fields
     if (!formData.name || !formData.email || !formData.phone || !formData.course) {
       return
     }
@@ -122,9 +138,17 @@ Sent from Binary Brains Website Enrollment Form`
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-card border-border">
         <DialogHeader>
-          <DialogTitle className="text-foreground text-xl">Enroll at Binary Brains</DialogTitle>
+          <DialogTitle className="text-foreground text-xl">
+            {batchInfo ? `Enroll for ${preSelectedCourse}` : "Enroll at Binary Brains"}
+          </DialogTitle>
           <DialogDescription className="text-muted-foreground">
-            Fill in your details and we&apos;ll get back to you within 24 hours.
+            {batchInfo ? (
+              <>
+                Batch starting on {batchInfo.startDate} at {batchInfo.startTime}
+              </>
+            ) : (
+              <>Fill in your details and we&apos;ll get back to you within 24 hours.</>
+            )}
           </DialogDescription>
         </DialogHeader>
 
@@ -191,6 +215,7 @@ Sent from Binary Brains Website Enrollment Form`
                 required
                 value={formData.course}
                 onValueChange={(value) => setFormData({ ...formData, course: value })}
+                disabled={!!preSelectedCourse}
               >
                 <SelectTrigger className="bg-background border-border">
                   <SelectValue placeholder="Select a course" />
@@ -201,6 +226,9 @@ Sent from Binary Brains Website Enrollment Form`
                       {course}
                     </SelectItem>
                   ))}
+                  {preSelectedCourse && !courses.includes(preSelectedCourse) && (
+                    <SelectItem value={preSelectedCourse}>{preSelectedCourse}</SelectItem>
+                  )}
                 </SelectContent>
               </Select>
             </div>

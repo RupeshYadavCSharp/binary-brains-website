@@ -9,6 +9,10 @@ export interface Course {
   tags: string[]
   popular: boolean
   createdAt: string
+  syllabus?: string[]
+  highlights?: string[]
+  prerequisites?: string[]
+  careerOutcomes?: string[]
 }
 
 export interface Batch {
@@ -36,6 +40,25 @@ const defaultCourses: Course[] = [
     tags: ["React", "Node.js", "MongoDB"],
     popular: true,
     createdAt: new Date().toISOString(),
+    syllabus: [
+      "HTML5 & CSS3 Fundamentals",
+      "JavaScript ES6+ & TypeScript",
+      "React.js & State Management",
+      "Node.js & Express.js",
+      "MongoDB & SQL Databases",
+      "REST APIs & GraphQL",
+      "Authentication & Security",
+      "Deployment & DevOps Basics",
+    ],
+    highlights: [
+      "Build 10+ real-world projects",
+      "Industry-relevant curriculum",
+      "Live coding sessions",
+      "Code reviews by experts",
+      "Job assistance program",
+    ],
+    prerequisites: ["Basic computer knowledge", "Logical thinking ability", "No prior coding experience required"],
+    careerOutcomes: ["Full Stack Developer", "Frontend Developer", "Backend Developer", "Web Application Developer"],
   },
   {
     id: "2",
@@ -45,6 +68,24 @@ const defaultCourses: Course[] = [
     tags: ["Python", "Django", "Flask"],
     popular: false,
     createdAt: new Date().toISOString(),
+    syllabus: [
+      "Python Basics & Syntax",
+      "Data Structures & Algorithms",
+      "Object-Oriented Programming",
+      "File Handling & Automation",
+      "Django Web Framework",
+      "Flask Microframework",
+      "Database Integration",
+      "API Development",
+    ],
+    highlights: [
+      "Hands-on coding exercises",
+      "Automation projects",
+      "Web scraping techniques",
+      "Real-world applications",
+    ],
+    prerequisites: ["Basic computer skills", "Eagerness to learn programming"],
+    careerOutcomes: ["Python Developer", "Backend Developer", "Automation Engineer", "Django Developer"],
   },
   {
     id: "3",
@@ -54,6 +95,19 @@ const defaultCourses: Course[] = [
     tags: ["Python", "TensorFlow", "SQL"],
     popular: true,
     createdAt: new Date().toISOString(),
+    syllabus: [
+      "Statistics & Probability",
+      "Python for Data Science",
+      "Data Visualization (Matplotlib, Seaborn)",
+      "Machine Learning Algorithms",
+      "Deep Learning & Neural Networks",
+      "TensorFlow & Keras",
+      "Natural Language Processing",
+      "Model Deployment",
+    ],
+    highlights: ["Work with real datasets", "Kaggle competitions", "Industry capstone project", "ML model deployment"],
+    prerequisites: ["Basic Python knowledge", "High school mathematics", "Analytical mindset"],
+    careerOutcomes: ["Data Scientist", "ML Engineer", "Data Analyst", "AI Specialist"],
   },
   {
     id: "4",
@@ -63,6 +117,24 @@ const defaultCourses: Course[] = [
     tags: ["React Native", "iOS", "Android"],
     popular: false,
     createdAt: new Date().toISOString(),
+    syllabus: [
+      "React Native Fundamentals",
+      "UI Components & Styling",
+      "Navigation & Routing",
+      "State Management (Redux)",
+      "Native Device Features",
+      "API Integration",
+      "App Store Deployment",
+      "Performance Optimization",
+    ],
+    highlights: [
+      "Build 5+ mobile apps",
+      "Deploy to App Store & Play Store",
+      "Cross-platform development",
+      "Real device testing",
+    ],
+    prerequisites: ["JavaScript knowledge", "Basic React.js understanding"],
+    careerOutcomes: ["Mobile App Developer", "React Native Developer", "Cross-Platform Developer"],
   },
   {
     id: "5",
@@ -72,6 +144,24 @@ const defaultCourses: Course[] = [
     tags: ["AWS", "Docker", "Kubernetes"],
     popular: false,
     createdAt: new Date().toISOString(),
+    syllabus: [
+      "Cloud Computing Fundamentals",
+      "AWS Services (EC2, S3, Lambda)",
+      "Docker Containerization",
+      "Kubernetes Orchestration",
+      "CI/CD Pipelines",
+      "Infrastructure as Code",
+      "Monitoring & Logging",
+      "Security Best Practices",
+    ],
+    highlights: [
+      "Hands-on AWS projects",
+      "Real-world deployment scenarios",
+      "Industry certifications prep",
+      "DevOps toolchain mastery",
+    ],
+    prerequisites: ["Linux basics", "Basic programming knowledge", "Networking fundamentals"],
+    careerOutcomes: ["DevOps Engineer", "Cloud Engineer", "Site Reliability Engineer", "Platform Engineer"],
   },
   {
     id: "6",
@@ -81,6 +171,24 @@ const defaultCourses: Course[] = [
     tags: ["Security", "Networking", "Linux"],
     popular: false,
     createdAt: new Date().toISOString(),
+    syllabus: [
+      "Security Fundamentals",
+      "Network Security",
+      "Ethical Hacking Techniques",
+      "Penetration Testing",
+      "Vulnerability Assessment",
+      "Cryptography",
+      "Security Tools & Frameworks",
+      "Incident Response",
+    ],
+    highlights: [
+      "Hands-on hacking labs",
+      "Real vulnerability testing",
+      "Industry tools training",
+      "Certification preparation",
+    ],
+    prerequisites: ["Basic networking knowledge", "Linux familiarity", "Problem-solving skills"],
+    careerOutcomes: ["Security Analyst", "Penetration Tester", "Security Engineer", "SOC Analyst"],
   },
 ]
 

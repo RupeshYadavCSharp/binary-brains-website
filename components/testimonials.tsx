@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -70,44 +70,6 @@ const companyLogos = [
 
 export function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
-
-  const stopAutoPlay = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-  }, [])
-
-  const handleSelectTestimonial = useCallback(
-    (index: number) => {
-      stopAutoPlay()
-      setActiveIndex(index)
-    },
-    [stopAutoPlay],
-  )
-
-  const nextTestimonial = useCallback(() => {
-    stopAutoPlay()
-    setActiveIndex((prev) => (prev + 1) % testimonials.length)
-  }, [stopAutoPlay])
-
-  const prevTestimonial = useCallback(() => {
-    stopAutoPlay()
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }, [stopAutoPlay])
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
-    }
-  }, [])
 
   return (
     <section id="testimonials" className="py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
@@ -194,39 +156,40 @@ export function Testimonials() {
 
           <div className="space-y-4">
             {testimonials.map((testimonial, index) => (
-              <button
+              <Card
                 key={index}
-                type="button"
-                onClick={() => handleSelectTestimonial(index)}
-                className={`w-full text-left p-4 sm:p-6 rounded-lg border transition-all duration-300 ${
+                onClick={() => setActiveIndex(index)}
+                className={`cursor-pointer transition-all duration-300 ${
                   index === activeIndex
                     ? "bg-primary/10 border-primary/50"
                     : "bg-card/50 border-border/50 hover:bg-card hover:border-border"
                 }`}
               >
-                <div className="flex items-center gap-4">
-                  <Avatar className="w-12 h-12">
-                    <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
-                    <AvatarFallback className="bg-primary/20 text-primary">
-                      {testimonial.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-foreground">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground truncate">
-                      {testimonial.role} at {testimonial.company}
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex items-center gap-4">
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
+                      <AvatarFallback className="bg-primary/20 text-primary">
+                        {testimonial.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-foreground">{testimonial.name}</div>
+                      <div className="text-sm text-muted-foreground truncate">
+                        {testimonial.role} at {testimonial.company}
+                      </div>
                     </div>
+                    <ArrowRight
+                      className={`w-5 h-5 transition-all ${
+                        index === activeIndex ? "text-primary translate-x-1" : "text-muted-foreground"
+                      }`}
+                    />
                   </div>
-                  <ArrowRight
-                    className={`w-5 h-5 transition-all ${
-                      index === activeIndex ? "text-primary translate-x-1" : "text-muted-foreground"
-                    }`}
-                  />
-                </div>
-              </button>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -236,7 +199,7 @@ export function Testimonials() {
           <Button
             variant="outline"
             size="icon"
-            onClick={prevTestimonial}
+            onClick={() => setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
             className="rounded-full border-border hover:border-primary hover:text-primary bg-transparent"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -247,7 +210,7 @@ export function Testimonials() {
               <button
                 key={index}
                 type="button"
-                onClick={() => handleSelectTestimonial(index)}
+                onClick={() => setActiveIndex(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === activeIndex ? "w-8 bg-primary" : "w-2 bg-border hover:bg-primary/50"
                 }`}
@@ -259,7 +222,7 @@ export function Testimonials() {
           <Button
             variant="outline"
             size="icon"
-            onClick={nextTestimonial}
+            onClick={() => setActiveIndex((prev) => (prev + 1) % testimonials.length)}
             className="rounded-full border-border hover:border-primary hover:text-primary bg-transparent"
           >
             <ChevronRight className="w-5 h-5" />

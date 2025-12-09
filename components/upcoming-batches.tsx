@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, Users, ArrowRight } from "lucide-react"
 import { getBatches, type Batch } from "@/lib/store"
+import { EnrollmentForm } from "@/components/enrollment-form"
 
 export function UpcomingBatches() {
   const [batches, setBatches] = useState<Batch[]>([])
@@ -97,10 +98,19 @@ export function UpcomingBatches() {
                   </div>
                 </div>
 
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Enroll Now
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                <EnrollmentForm
+                  preSelectedCourse={batch.courseName}
+                  batchInfo={{
+                    startDate: formatDate(batch.startDate),
+                    startTime: formatTime(batch.startTime),
+                  }}
+                  triggerButton={
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                      Enroll Now
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  }
+                />
               </CardContent>
             </Card>
           ))}
