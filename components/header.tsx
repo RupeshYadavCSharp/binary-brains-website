@@ -7,7 +7,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Instagram, Linkedin, Menu, X, Youtube } from "lucide-react"
 
 const navLinks = [
   { href: "/#courses", label: "Courses" },
@@ -53,6 +53,23 @@ export function Header() {
             </Button>
             <Button className="bg-primary text-primary-foreground hover:bg-primary/90">Get Started</Button>
           </div>
+
+          <div className="hidden md:flex items-center gap-4">
+
+  <Link href="https://www.youtube.com/@binarybrains5462" target="_blank">
+    <Youtube className="h-5 w-5 text-muted-foreground hover:text-red-600 transition-colors" />
+  </Link>
+
+  <Link href="https://www.instagram.com/binarybrainsnagpur/" target="_blank">
+    <Instagram className="h-5 w-5 text-muted-foreground hover:text-pink-600 transition-colors" />
+  </Link>
+
+  <Link href="https://www.linkedin.com/company/binary-brains-nagpur?originalSubdomain=in" target="_blank">
+    <Linkedin className="h-5 w-5 text-muted-foreground hover:text-blue-600 transition-colors" />
+  </Link>
+
+</div>
+
 
           <button className="md:hidden text-foreground" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

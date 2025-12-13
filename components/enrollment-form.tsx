@@ -30,15 +30,15 @@ const courses = [
   "Digital Marketing",
   "Other",
 ]
-
 interface EnrollmentFormProps {
-  triggerButton?: React.ReactNode
-  preSelectedCourse?: string
+  preSelectedCourse: string
   batchInfo?: {
     startDate: string
     startTime: string
   }
+  triggerButton?: React.ReactNode
 }
+
 
 export function EnrollmentForm({ triggerButton, preSelectedCourse, batchInfo }: EnrollmentFormProps) {
   const [open, setOpen] = useState(false)

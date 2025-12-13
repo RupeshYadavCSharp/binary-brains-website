@@ -167,7 +167,7 @@ export function CourseDetailsDialog({ course, open, onOpenChange }: CourseDetail
                     }
                   : undefined
               }
-              trigger={
+              triggerButton={
                 <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground">Enroll Now</Button>
               }
             />

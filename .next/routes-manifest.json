@@ -50,12 +50,6 @@
       "regex": "^/admin/login(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/admin/login(?:/)?$"
-    },
-    {
-      "page": "/api/enroll",
-      "regex": "^/api/enroll(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/api/enroll(?:/)?$"
     }
   ],
   "dataRoutes": [],

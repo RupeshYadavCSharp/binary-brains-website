@@ -47,6 +47,7 @@ export function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <EnrollmentForm
+                preSelectedCourse=""
                 triggerButton={
                   <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
                     Enroll Now

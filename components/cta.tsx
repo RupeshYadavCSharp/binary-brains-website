@@ -29,6 +29,7 @@ export function CTA() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <EnrollmentForm
+              preSelectedCourse=""
                 triggerButton={
                   <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
                     Enroll Now

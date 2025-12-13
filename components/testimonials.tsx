@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Quote, Star, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 
+
+
 const testimonials = [
   {
     name: "Priya Sharma",

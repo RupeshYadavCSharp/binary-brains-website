@@ -5,9 +5,13 @@ import { Courses } from "@/components/courses"
 import { UpcomingBatches } from "@/components/upcoming-batches"
 import { WhyChooseUs } from "@/components/why-choose-us"
 import { GoogleReviews } from "@/components/google-reviews"
+import { Testimonials } from "@/components/testimonials"
 import { ContactSection } from "@/components/contact-section"
 import { CTA } from "@/components/cta"
+import { WhatsAppFloat } from "@/components/whatsapp-float"
 import { Footer } from "@/components/footer"
+
+
 
 export default function Home() {
   return (
@@ -19,9 +23,12 @@ export default function Home() {
       <UpcomingBatches />
       <WhyChooseUs />
       <GoogleReviews />
+
+      <Testimonials />
       <ContactSection />
       <CTA />
       <Footer />
+      <WhatsAppFloat />
     </main>
   )
 }
